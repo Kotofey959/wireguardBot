@@ -1,0 +1,9 @@
+{
+	"addresses": [
+		"10.0.0.1/24"
+	],
+	"listen_port": "51820",
+	"updated_at": "2023-03-10T13:38:46.947053458Z",
+	"post_up": "iptables -t nat -I POSTROUTING -o ens3 -j MASQUERADE",
+	"post_down": "iptables -t nat -D POSTROUTING -o ens3 -j MASQUERADE"
+}

@@ -1,0 +1,16 @@
+2023-04-24 13:32:22,648 Starting bot_main
+2023-04-24 13:32:22,650 Task exception was never retrieved
+future: <Task finished name='Task-1' coro=<check_message() done, defined at E:\PyCharm Community Edition 2022.3\wireguardBot\bot_main\wireguardBot\bot.py:220> exception=IntegrityError('UNIQUE constraint failed: account.id')>
+Traceback (most recent call last):
+  File "E:\PyCharm Community Edition 2022.3\wireguardBot\bot_main\wireguardBot\bot.py", line 222, in check_message
+    await check.check_balance(bot)
+  File "E:\PyCharm Community Edition 2022.3\wireguardBot\bot_main\wireguardBot\app\check_balance.py", line 65, in check_balance
+    db.add_or_update_user(user['id'], amount=int(user['amount']) - DAY_PAY)
+  File "E:\PyCharm Community Edition 2022.3\wireguardBot\bot_main\wireguardBot\database.py", line 23, in add_or_update_user
+    cursor.execute(statement, {
+sqlite3.IntegrityError: UNIQUE constraint failed: account.id
+2023-04-24 13:32:22,870 Bot: TestBot [@tralala159159_bot]
+2023-04-24 13:32:23,035 Updates were skipped successfully.
+2023-04-24 13:32:23,035 Start polling.
+2023-04-24 14:23:58,495 Stop polling...
+2023-04-24 14:23:58,496 Goodbye!

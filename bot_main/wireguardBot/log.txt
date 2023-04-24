@@ -1,0 +1,6 @@
+2023-03-03 15:19:48,999 Starting bot
+2023-03-03 15:19:49,350 Bot: WolfVPN [@wolf0vpn_bot]
+2023-03-03 15:19:49,474 Updates were skipped successfully.
+2023-03-03 15:19:49,475 Start polling.
+2023-03-03 15:20:31,081 Stop polling...
+2023-03-03 15:20:31,082 Goodbye!

@@ -1,0 +1,19 @@
+{
+	"id": "cg5iicv3pva63jfsk120",
+	"private_key": "GLwuL9WqVjBkfG0nKaAkp4UGI2S68IL4HAJc5hUvn34=",
+	"public_key": "em9j2IkGiA12eiVrCHzoQtfS8pWObIm+2i8nIIhcFQM=",
+	"preshared_key": "296cbeUPlvsLAk3xfDabQ9QpLIrkRdEBmxpNLZtovgs=",
+	"name": "Dev",
+	"email": "",
+	"allocated_ips": [
+		"10.0.0.2/32"
+	],
+	"allowed_ips": [
+		"0.0.0.0/0"
+	],
+	"extra_allowed_ips": [],
+	"use_server_dns": true,
+	"enabled": true,
+	"created_at": "2023-03-10T12:57:23.583863742Z",
+	"updated_at": "2023-03-10T12:57:23.583863742Z"
+}

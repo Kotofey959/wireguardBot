@@ -1,0 +1,19 @@
+{
+	"id": "cge21gn3pva6q38kffcg",
+	"private_key": "oLGGIz2zPcTdIdWujR9CzrgvzTRYk0C1QDjqUjGt6Hw=",
+	"public_key": "aaj6ilvzI+npcCDM0bpluWxFJw3lNdVNjePOr0IsYHk=",
+	"preshared_key": "bjHHFmCITwoaOA97ekEOpspJbdertyMyqgGFKOCYzOU=",
+	"name": "441101766",
+	"email": "",
+	"allocated_ips": [
+		"10.0.0.24/32"
+	],
+	"allowed_ips": [
+		"0.0.0.0/0"
+	],
+	"extra_allowed_ips": [],
+	"use_server_dns": true,
+	"enabled": true,
+	"created_at": "2023-03-23T09:49:54.78800321Z",
+	"updated_at": "2023-03-23T09:49:54.78800321Z"
+}

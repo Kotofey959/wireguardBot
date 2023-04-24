@@ -1,0 +1,19 @@
+{
+	"id": "cge1vuf3pva6q38kffa0",
+	"private_key": "wHOds0eu183mpgSbdUv4unfE14YfqbDDaPTJNTkBPHY=",
+	"public_key": "023F5dsKmLIiBl/VTKjlNbw/0vkyMVzLrHNcE7+Cqyk=",
+	"preshared_key": "tRaESDxoqtGSRa1WrnGFofzaSwE44+M3SvMkLOOCpYE=",
+	"name": "2020",
+	"email": "",
+	"allocated_ips": [
+		"10.0.0.20/32"
+	],
+	"allowed_ips": [
+		"0.0.0.0/0"
+	],
+	"extra_allowed_ips": [],
+	"use_server_dns": true,
+	"enabled": true,
+	"created_at": "2023-03-23T09:46:33.940280224Z",
+	"updated_at": "2023-03-23T09:46:33.940280224Z"
+}

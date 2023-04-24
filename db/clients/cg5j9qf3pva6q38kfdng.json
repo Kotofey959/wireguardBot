@@ -1,0 +1,19 @@
+{
+	"id": "cg5j9qf3pva6q38kfdng",
+	"private_key": "cAk7hQqWVylpZpR4hboowORnMgVQFEMPC17HZxlaXXw=",
+	"public_key": "VTnjoH8M5KQLyEIRHewpmRdVgsfbzplL8kIA2sz0RT4=",
+	"preshared_key": "q/Q+Zn/7+MVetH5BCZ+TdQ0s9iBNsXsNw8+gAgO/aqg=",
+	"name": "Test111",
+	"email": "",
+	"allocated_ips": [
+		"10.0.0.3/32"
+	],
+	"allowed_ips": [
+		"0.0.0.0/0"
+	],
+	"extra_allowed_ips": [],
+	"use_server_dns": true,
+	"enabled": true,
+	"created_at": "2023-03-10T13:47:21.990136487Z",
+	"updated_at": "2023-03-10T13:47:21.990136487Z"
+}
