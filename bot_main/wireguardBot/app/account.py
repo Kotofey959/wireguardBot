@@ -80,7 +80,7 @@ async def get_config_file(callback: aiogram.types.CallbackQuery, bot: aiogram.Bo
     if 'status' in qrcode and qrcode['status'] is False:
         await bot.send_message(
             chat_id=chat_id,
-            text="Такой конфига больше не существует"
+            text="Такого конфига больше не существует"
         )
         return
     header, encoded = qrcode['QRCode'].split(",", 1)
@@ -178,11 +178,12 @@ async def add_balance(callback: aiogram.types.CallbackQuery, bot: aiogram.Bot):
     )
 
 
-async def buy_key(callback: aiogram.types.CallbackQuery, bot: aiogram.Bot):
+async def buy_key(callback: aiogram.types.CallbackQuery, bot: aiogram.Bot, prolong=False):
     user = db.get_account_by_chat_id(callback.from_user.id)
     amount = int(user['amount'])
+    msg = 'продлить' if prolong else 'купить'
     if amount < 499:
-        msg = "К сожалению, у Вас не достаточно средств😔. Но вы можете купить ключ сразу!"
+        msg = f"К сожалению, у Вас не достаточно средств😔. Но вы можете {msg} ключ сразу!"
         await bot.send_message(
             chat_id=callback.from_user.id,
             text=msg
@@ -192,7 +193,7 @@ async def buy_key(callback: aiogram.types.CallbackQuery, bot: aiogram.Bot):
         await choose_tariff(callback, bot)
 
 
-async def my_vpn(callback: aiogram.types.CallbackQuery, bot: aiogram.Bot):
+async def my_vpn(callback: aiogram.types.CallbackQuery, bot: aiogram.Bot, prolong: bool = False):
     chat_id = callback.from_user.id
     vpn_list = db.get_vpn_by_chat_id(chat_id)
     if vpn_list is False:
@@ -202,11 +203,18 @@ async def my_vpn(callback: aiogram.types.CallbackQuery, bot: aiogram.Bot):
     for it, vpn in enumerate(vpn_list):
         file_name = f"{it + 1} 🔑 🚀  VPN15_" + str(1000 + int(vpn['allocated_ips'].split("/")[0].split(".")[-1])) + \
                     f" Осталось {int(vpn['amount']) // DAY_PAY} дней"
-        buttons.append([types.InlineKeyboardButton(text=file_name, callback_data=f"vpn_{vpn['id_vpn']}")])
+        buttons.append([types.InlineKeyboardButton(text=file_name,
+                                                   callback_data=f"vpn_{vpn['id_vpn']}" if not prolong
+                                                   else f"pro_long_{vpn['id_vpn']}")])
+    if not prolong:
+        buttons.append([types.InlineKeyboardButton(text="⌛Продлить VPN", callback_data="prolong_vpn")])
     buttons.append([types.InlineKeyboardButton(text="⬅️Назад", callback_data="main_menu")])
     keyboard = types.InlineKeyboardMarkup(inline_keyboard=buttons)
+    answer_text = "🔑Мои VPN:"
+    if prolong:
+        answer_text = "Какой VPN необходимо продлить?"
     await bot.send_message(
         chat_id=chat_id,
-        text="🔑Мои VPN:",
+        text=answer_text,
         reply_markup=keyboard
     )

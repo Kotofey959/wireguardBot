@@ -238,3 +238,18 @@ def add_payment_in_history(user_id: int,
         print("Ошибка: ", err)
     else:
         cursor.connection.commit()
+
+
+def update_amount_vpn_id(vpn_id: str,
+                         amount: int):
+    statement = "UPDATE users SET amount = :amount WHERE id_vpn = :vpn_id"
+    try:
+        cursor.execute(statement, {
+            "vpn_id": vpn_id,
+            "amount": amount
+        })
+    except sqlite3.DataError as err:
+        print("Ошибка: ", err)
+    else:
+        cursor.connection.commit()
+

@@ -117,6 +117,13 @@ async def prfMenu(callback: types.CallbackQuery):
     await callback.answer()
 
 
+@dp.callback_query_handler(Text(startswith="pro_long"))
+async def prfMenu(callback: types.CallbackQuery):
+    vpn_id = callback.data.split('_')[-1]
+    await pay.choose_tariff(callback, bot, prolong=vpn_id)
+    await callback.answer()
+
+
 @dp.callback_query_handler(Text(equals="config_file"))
 async def prfMenu(callback: types.CallbackQuery):
     await acc.get_config_file(callback, bot)
@@ -186,22 +193,34 @@ async def prfMenu(callback: types.CallbackQuery):
 
 @dp.callback_query_handler(Text(startswith="3_month"))
 async def prfMenu(callback: types.CallbackQuery):
-    pay = int(callback.data.split("_")[-1])
-    await connect.add_new_key(callback, bot, 499, 1, pay)
+    pay = callback.data.split("_")[-1]
+    if len(pay) > 5:
+        await connect.add_new_key(callback, bot, 499, 1, prolong_id=pay)
+        await callback.answer()
+        return
+    await connect.add_new_key(callback, bot, 499, 1, int(pay))
     await callback.answer()
 
 
 @dp.callback_query_handler(Text(startswith="6_month"))
 async def prfMenu(callback: types.CallbackQuery):
-    pay = int(callback.data.split("_")[-1])
-    await connect.add_new_key(callback, bot, 899, 1, pay)
+    pay = callback.data.split("_")[-1]
+    if len(pay) > 5:
+        await connect.add_new_key(callback, bot, 899, 1, prolong_id=pay)
+        await callback.answer()
+        return
+    await connect.add_new_key(callback, bot, 899, 1, int(pay))
     await callback.answer()
 
 
 @dp.callback_query_handler(Text(startswith="12_month"))
 async def prfMenu(callback: types.CallbackQuery):
-    pay = int(callback.data.split("_")[-1])
-    await connect.add_new_key(callback, bot, 1399, 1, pay)
+    pay = callback.data.split("_")[-1]
+    if len(pay) > 5:
+        await connect.add_new_key(callback, bot, 1399, 1, prolong_id=pay)
+        await callback.answer()
+        return
+    await connect.add_new_key(callback, bot, 1399, 1, int(pay))
     await callback.answer()
 
 
@@ -212,9 +231,20 @@ async def prfMenu(callback: types.CallbackQuery):
     await callback.answer()
 
 
-@dp.callback_query_handler(Text(equals="appr_pay"))
+@dp.callback_query_handler(Text(startswith="appr_pay"))
 async def prfMenu(callback: types.CallbackQuery):
+    prolong_id = callback.data.split("_")[-1]
+    if len(prolong_id) > 5:
+        await pay.get_operation_status(callback, prolong_id=prolong_id)
+        await callback.answer()
+        return
     await pay.get_operation_status(callback, bot)
+    await callback.answer()
+
+
+@dp.callback_query_handler(Text(equals="prolong_vpn"))
+async def prfMenu(callback: types.CallbackQuery):
+    await acc.my_vpn(callback, bot, prolong=True)
     await callback.answer()
 
 

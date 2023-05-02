@@ -42,7 +42,8 @@ async def pay_buttons(
         bot: aiogram.Bot,
         value: int,
         count: int = 1,
-        pay: int = 0):
+        pay: int = 0,
+        prolong_id: str = None):
 
     label = get_label()
     label = label + f"_{count}_{pay}"
@@ -60,7 +61,8 @@ async def pay_buttons(
     msg = "Счет уже выставлен, можете оплатить.После успешной оплаты платежа, обязательно нажмите кнопку '✅ Я оплатил(а)' "
     buttons = [
         [types.InlineKeyboardButton(text="Оплатить", url=quickpay.redirected_url)],
-        [types.InlineKeyboardButton(text="✅ Я оплатил(а)", callback_data="appr_pay")],
+        [types.InlineKeyboardButton(text="✅ Я оплатил(а)",
+                                    callback_data="appr_pay" if not prolong_id else f"appr_pay_{prolong_id}")],
         [types.InlineKeyboardButton(text="🏡В главное меню", callback_data="main_menu")],
     ]
     keyboard = types.InlineKeyboardMarkup(inline_keyboard=buttons)
@@ -70,11 +72,14 @@ async def pay_buttons(
         reply_markup=keyboard)
 
 
-async def get_operation_status(callback: aiogram.types.CallbackQuery, bot: aiogram.Bot):
+async def get_operation_status(callback: aiogram.types.CallbackQuery, prolong_id=None):
     chat_id = callback.from_user.id
     user = db.get_account_by_chat_id(chat_id)
-    print(user)
-
+    pay_dict = {
+        499: 90*6,
+        899: 180*6,
+        1399: 360*6
+    }
     if user['is_paid'] == 0:
         client = Client(YOOMONEY_TOKEN)
         details = client.operation_history(label=user['label'])
@@ -83,6 +88,8 @@ async def get_operation_status(callback: aiogram.types.CallbackQuery, bot: aiogr
             count = label_parse[-2]
             is_paid = label_parse[-1]
             if is_paid == 1:
+                if prolong_id:
+                    db.update_amount_vpn_id(prolong_id, pay_dict[int(user['value_to_pay'])])
                 for i in range(count):
                     value_to_pay = int(user['value_to_pay'])
                     add_client_status = api.add_client(str(chat_id))
@@ -98,9 +105,11 @@ async def get_operation_status(callback: aiogram.types.CallbackQuery, bot: aiogr
         await callback.answer(text="Оплата успешно проведена! Перейдите в 🔑 Мои VPN📱💻", show_alert=True)
 
 
-async def choose_tariff(callback: aiogram.types.CallbackQuery, bot: aiogram.Bot, pay: int = 0):
+async def choose_tariff(callback: aiogram.types.CallbackQuery, bot: aiogram.Bot, pay: int = 0, prolong=0):
     chat_id = callback.from_user.id
     msg = "⬇️ ВЫБЕРИТЕ ТАРИФ:"
+    if prolong:
+        pay = prolong
     buttons = [
         [types.InlineKeyboardButton(text="🔑 3 месяца - 499р.", callback_data=f"3_month_{pay}")],
         [types.InlineKeyboardButton(text="🔑 6 месяцев - 899р.", callback_data=f"6_month_{pay}")],
@@ -108,6 +117,8 @@ async def choose_tariff(callback: aiogram.types.CallbackQuery, bot: aiogram.Bot,
         [types.InlineKeyboardButton(text="🔑 2 ключа на год - 2399р.", callback_data=f"12_2_month_{pay}")],
         [types.InlineKeyboardButton(text="⬅️Назад", callback_data="main_menu")]
     ]
+    if prolong:
+        buttons.pop(-2)
     keyboard = types.InlineKeyboardMarkup(inline_keyboard=buttons)
     # await bot_main.edit_message_text(
     #     chat_id=chat_id,
