@@ -10,7 +10,7 @@ def my_factory(c, r):
     return d
 
 
-conn = sqlite3.connect("E:\\PyCharm Community Edition 2022.3\\wireguardBot\\bot_main\\wireguardBot\\vpn_data.db",
+conn = sqlite3.connect("/root/wireguardBot/bot_main/wireguardBot/vpn_data.db",
                        check_same_thread=False)
 conn.row_factory = my_factory
 cursor = conn.cursor()
