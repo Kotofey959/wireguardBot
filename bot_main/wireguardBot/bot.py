@@ -5,11 +5,11 @@ from aiogram import Bot, Dispatcher, executor, types
 from aiogram.dispatcher.filters import Text
 from aiogram.dispatcher import FSMContext
 from aiogram.types import BotCommand
-import app.account as acc
-import app.pay as pay
-import app.common as common
-import app.connect as connect
-import app.check_balance as check
+import account as acc
+import pay as pay
+import common as common
+import connect as connect
+import check_balance as check
 from datetime import datetime, timedelta
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from utils import States
