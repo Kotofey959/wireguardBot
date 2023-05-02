@@ -6,9 +6,9 @@ from aiogram import types
 
 import api
 import database as db
-from .account import main_menu
-from .connect import register
-from .messages import *
+from account import main_menu
+from connect import register
+from messages import *
 
 f = open('env.json')
 config = json.load(f)

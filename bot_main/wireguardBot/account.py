@@ -9,8 +9,8 @@ from aiogram.utils.markdown import bold, text
 
 import api
 import database as db
-from .messages import *
-from .pay import choose_tariff
+from messages import *
+from pay import choose_tariff
 
 f = open('env.json')
 config = json.load(f)

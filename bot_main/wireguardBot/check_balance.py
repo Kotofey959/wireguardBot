@@ -5,7 +5,7 @@ from aiogram import types
 
 import api
 import database as db
-from .messages import *
+from messages import *
 
 f = open('env.json')
 config = json.load(f)

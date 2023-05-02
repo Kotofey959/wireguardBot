@@ -1,4 +1,4 @@
-from .pay import *
+from pay import *
 from database import get_vpn_by_vpn_id
 
 f = open('env.json')
