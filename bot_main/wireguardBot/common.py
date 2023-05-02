@@ -1,11 +1,14 @@
+import json
+from base64 import b64decode
+
 import aiogram
 from aiogram import types
-from base64 import b64decode
-from bot_main.wireguardBot import database as db, api
-from .messages import *
+
+import api
+import database as db
 from .account import main_menu
 from .connect import register
-import json
+from .messages import *
 
 f = open('env.json')
 config = json.load(f)

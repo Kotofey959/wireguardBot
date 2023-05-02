@@ -1,5 +1,5 @@
 from .pay import *
-from bot_main.wireguardBot.database import get_vpn_by_vpn_id
+from database import get_vpn_by_vpn_id
 
 f = open('env.json')
 config = json.load(f)

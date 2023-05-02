@@ -1,14 +1,16 @@
+import json
+from base64 import b64decode
+
 import aiogram
 from aiogram import types
-import json
-from bot_main.wireguardBot import database as db, api
-
-from .pay import choose_tariff
-from base64 import b64decode
+from aiogram.types import ParseMode
 from aiogram.utils import exceptions
 from aiogram.utils.markdown import bold, text
-from aiogram.types import ParseMode
+
+import api
+import database as db
 from .messages import *
+from .pay import choose_tariff
 
 f = open('env.json')
 config = json.load(f)

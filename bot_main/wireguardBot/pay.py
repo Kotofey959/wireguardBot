@@ -1,10 +1,12 @@
+import json
+import random
+
 import aiogram
 from aiogram import types
 from yoomoney import Authorize, Quickpay, Client
-import random
-from bot_main.wireguardBot import database as db, api
-import json
 
+import api
+import database as db
 
 f = open('env.json')
 config = json.load(f)

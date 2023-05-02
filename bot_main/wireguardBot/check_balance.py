@@ -1,9 +1,11 @@
-from bot_main.wireguardBot import api, database as db
+import json
+
 import aiogram
 from aiogram import types
-import json
-from .messages import *
 
+import api
+import database as db
+from .messages import *
 
 f = open('env.json')
 config = json.load(f)
