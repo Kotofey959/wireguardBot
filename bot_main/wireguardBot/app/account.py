@@ -1,7 +1,7 @@
 import aiogram
 from aiogram import types
 import json
-from .. import api, database as db
+from bot_main.wireguardBot import database as db, api
 
 from .pay import choose_tariff
 from base64 import b64decode
